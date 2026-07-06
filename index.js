@@ -18,7 +18,7 @@ app.post('/create', async (req, res) => {
     const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 
     if (!ZONE_ID || ZONE_ID === 'undefined') {
-        return res.status(500).json({ error: "ZONE_ID မရှိပါ သို့မဟုတ် မမှန်ကန်ပါ" });
+        return res.status(500).json({ error: "cfut_toqeANUsgLNoZKrwpsXEUY0mZ3lcjFL4PxVB8KOy8982a50a" });
     }
 
     try {
