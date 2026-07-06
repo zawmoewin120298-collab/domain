@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subdomain Creator</title>
+</head>
+<body>
+    <h2>Subdomain ဆောက်ရန်</h2>
+    <input type="text" id="subdomain" placeholder="Subdomain နာမည် (ဥပမာ: my-app)">
+    <input type="text" id="targetIp" placeholder="Target IP (ဥပမာ: 8.8.8.8)">
+    <button onclick="createSubdomain()">Domain ဆောက်မည်</button>
+    <p id="result"></p>
+
+    <script>
+        async function createSubdomain() {
+            const subdomain = document.getElementById('subdomain').value;
+            const targetIp = document.getElementById('targetIp').value;
+            const resultText = document.getElementById('result');
+
+            resultText.innerText = "ခဏစောင့်ပါ...";
+
+            try {
+                const response = await fetch('https://domain-production-f522.up.railway.app/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ subdomain, targetIp })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    resultText.innerText = "အောင်မြင်သည်! Domain: " + data.data.name;
+                } else {
+                    resultText.innerText = "အမှား: " + data.error;
+                }
+            } catch (err) {
+                resultText.innerText = "Server နဲ့ ချိတ်ဆက်၍ မရပါ";
+            }
+        }
+    </script>
+</body>
+</html>
+
